@@ -1,4 +1,4 @@
-from dataclasses import dataclass, InitVar, field
+from dataclasses import dataclass, InitVar, field, asdict
 from typing import List, Dict
 from datetime import datetime
 
@@ -52,3 +52,6 @@ class StationStatus:
         self.available_docks = num_docks_available
         self.disabled_docks = num_docks_disabled
         self.rent_status = bool(is_renting)
+
+    def as_dict(self):
+        return asdict(self)
