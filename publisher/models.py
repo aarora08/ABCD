@@ -19,6 +19,9 @@ class Station(Location):
     rental_methods: List[str]
     capacity: int
 
+    def as_dict(self):
+        return asdict(self)
+
 
 @dataclass
 class StationStatus:
