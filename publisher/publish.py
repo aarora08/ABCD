@@ -8,7 +8,7 @@ import asyncio
 from aiohttp import ClientSession
 import time
 from google.cloud import pubsub_v1
-
+import json
 BASE_URL = "https://gbfs.citibikenyc.com/gbfs/en"
 
 
@@ -29,11 +29,10 @@ async def run(loop, url, model, run_rate: int, publisher: pubsub_v1, topic_name)
         data: Dict = await task
         await raw_data.put(data)
 
-    built_models = []
     while not raw_data.empty():
         data = await raw_data.get()
         for item in data_parser(data, model):
-            publisher.publish(topic_name, str(item.as_dict()).encode())
+            publisher.publish(topic_name, str(json.dumps(item.as_dict())).encode())
 
 
 def data_parser(data: Dict, model: Any) -> Iterator[Any]:
@@ -43,15 +42,18 @@ def data_parser(data: Dict, model: Any) -> Iterator[Any]:
 
 
 def main():
-    run_rate = 100
+    run_rate = 1
 
     start_async = time.time()
     publisher = pubsub_v1.PublisherClient()
     topic_name = "projects/{project_id}/topics/{topic}".format(
         project_id=os.getenv("DEVSHELL_PROJECT_ID"),
-        topic="stations_ingestion",
+        topic="station_ingestion_v1",
     )
-    # publisher.create_topic(topic_name)
+    try:
+        publisher.create_topic(topic_name)
+    except:
+        print("topic already exists")
     loop = asyncio.get_event_loop()
     loop.run_until_complete(
         run(

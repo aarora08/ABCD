@@ -26,13 +26,13 @@ class Station(Location):
 @dataclass
 class StationStatus:
     station_id: int
-    eightd_has_available_keys: InitVar[List[Dict[str, str]]]
+    eightd_has_available_keys: InitVar[bool]
     num_bikes_available: InitVar[int]
     num_bikes_disabled: InitVar[int]
     num_docks_available: InitVar[int]
     num_docks_disabled: InitVar[int]
     is_renting: InitVar[int]
-    available_key_id: str = field(init=False)
+    available_key_id: bool = field(init=False)
     available_bikes: int = field(init=False)
     disabled_bikes: int = field(init=False)
     available_docks: int = field(init=False)
@@ -42,7 +42,7 @@ class StationStatus:
 
     def __post_init__(
         self,
-        eightd_has_available_keys: Dict[str, str],
+        eightd_has_available_keys: bool,
         num_bikes_available: int,
         num_bikes_disabled: int,
         num_docks_available: int,
