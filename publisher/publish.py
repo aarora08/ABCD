@@ -9,6 +9,7 @@ from aiohttp import ClientSession
 import time
 from google.cloud import pubsub_v1
 import json
+
 BASE_URL = "https://gbfs.citibikenyc.com/gbfs/en"
 
 
@@ -41,35 +42,33 @@ def data_parser(data: Dict, model: Any) -> Iterator[Any]:
         yield model_obj
 
 
-def main():
-    while True:
-        run_rate = 10
-
-        start_async = time.time()
-        publisher = pubsub_v1.PublisherClient()
-        topic_name = "projects/{project_id}/topics/{topic}".format(
-            project_id=os.getenv("DEVSHELL_PROJECT_ID"),
-            topic="station_ingestion_v1",
+def main(run_rate=1):
+    start_async = time.time()
+    publisher = pubsub_v1.PublisherClient()
+    topic_name = "projects/{project_id}/topics/{topic}".format(
+        project_id=os.getenv("DEVSHELL_PROJECT_ID"),
+        topic="station_ingestion",
+    )
+    try:
+        publisher.create_topic(topic_name)
+    except:
+        print("topic already exists")
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(
+        run(
+            loop=loop,
+            url=f"{BASE_URL}/station_status.json",
+            model=StationStatus,
+            run_rate=run_rate,
+            publisher=publisher, topic_name=topic_name
         )
-        try:
-            publisher.create_topic(topic_name)
-        except:
-            print("topic already exists")
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(
-            run(
-                loop=loop,
-                url=f"{BASE_URL}/station_status.json",
-                model=StationStatus,
-                run_rate=run_rate,
-                publisher=publisher, topic_name=topic_name
-            )
-        )
-        end_async = time.time() - start_async
+    )
+    end_async = time.time() - start_async
 
-        print(f"async runtime:{end_async}")
-        time.sleep(30)
+    print(f"async runtime:{end_async}")
 
 
 if __name__ == "__main__":
-    main()
+    while True:
+        main(run_rate=1)
+        time.sleep(30)
