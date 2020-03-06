@@ -51,10 +51,10 @@ def main():
             project_id=os.getenv("DEVSHELL_PROJECT_ID"),
             topic="station_ingestion_v1",
         )
-        # try:
-        #     publisher.create_topic(topic_name)
-        # except:
-        #     print("topic already exists")
+        try:
+            publisher.create_topic(topic_name)
+        except:
+            print("topic already exists")
         loop = asyncio.get_event_loop()
         loop.run_until_complete(
             run(
