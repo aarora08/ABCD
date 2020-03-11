@@ -6,7 +6,7 @@ def main():
     subscriber = pubsub_v1.SubscriberClient()
 
     def callback(message):
-        print('Received message: {}'.format(message))
+        print("Received message: {}".format(message))
         message.ack()
 
     topic_name = "projects/{project_id}/topics/{topic}".format(
