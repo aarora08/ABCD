@@ -1,5 +1,5 @@
-from typing import Dict, Any
 from dataclasses import _MISSING_TYPE
+from typing import Any, Dict
 
 
 def model_builder(args: Dict, tuple_type, additional=None) -> Any:

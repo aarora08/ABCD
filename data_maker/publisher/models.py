@@ -1,6 +1,6 @@
-from dataclasses import dataclass, InitVar, field, asdict
-from typing import List, Dict
+from dataclasses import InitVar, asdict, dataclass, field
 from datetime import datetime
+from typing import Dict, List
 
 
 @dataclass
