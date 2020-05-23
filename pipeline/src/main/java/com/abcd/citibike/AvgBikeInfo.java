@@ -28,11 +28,6 @@ public class AvgBikeInfo {
         newInfo.timestamp = info[5];
         return newInfo;
     }
-//
-//    public static void main(String[] args) {
-//        String test = "{\"station_id\": 304, \"available_key_id\": true, \"available_bikes\": 21, \"disabled_bikes\": 2, \"available_docks\": 10, \"disabled_docks\": 0, \"rent_status\": true, \"last_reported\": 1583431113}";
-////		newBikeInfo(test);
-//    }
 
     public String getStationID() {
         return stationID;
