@@ -92,7 +92,7 @@ $ python publish.py
 
 Here's the beautiful Dataflow pipeline running:
 
-![2020-05-23 12.13.30](static/2020-05-23 12.13.30.jpg)
+![Pipeline](![2020-05-23 12.13.30](https://github.com/aarora08/ABCD/blob/master/static/2020-05-23%2012.13.30.jpg))
 
 ## Contributing
 
