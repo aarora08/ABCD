@@ -84,7 +84,7 @@ $ mvn compile exec:java -Dexec.mainClass=com.abcd.citibike.AverageBikes \
 And for Publisher
 
 ```bash
-$ cd ~/abcd/pub_sub
+$ cd ~/abcd/pub_sub/publisher
 $ python publish.py
 ```
 
