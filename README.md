@@ -98,10 +98,6 @@ Here's the beautiful Dataflow pipeline running:
 
 All suggestions are welcome, use a PR and as the sole maintainer of this tiny project, I'll see what I can review and approve!
 
-## Authors
-
-* **Arshit Arora**
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
