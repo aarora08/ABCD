@@ -333,4 +333,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# service account
+**gcp-key.json
+
 # End of https://www.gitignore.io/api/data,venv,macos,python,pycharm,windows,jetbrains
