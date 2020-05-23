@@ -334,6 +334,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # service account
-*gcp-key.json
+**gcp-key.json
 
 # End of https://www.gitignore.io/api/data,venv,macos,python,pycharm,windows,jetbrains
